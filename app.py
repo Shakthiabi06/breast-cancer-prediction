@@ -23,13 +23,20 @@ st.markdown("""
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
-    --primary: #c48197;
-    --secondary: #b66681;
-    --accent: #dfc1cb;
-    --soft: #af8f7e;
-    --deep: #a7816d;
-    --text-dark: #3a2b2f;
-    --text-light: #ffffff;
+    --bg-main: #fff7fa;
+    --bg-card: #ffffff;
+
+    --primary: #c48197;     /* main pink */
+    --primary-dark: #b66681;
+    --primary-soft: #f3d6df;
+
+    --accent: #dfc1cb;      /* borders */
+
+    --text-main: #3a2b2f;
+    --text-muted: #7a5a63;
+
+    --success: #66bb6a;
+    --danger: #ef5350;
 }
 
 html, body,
@@ -73,7 +80,7 @@ html, body,
     font-size: 0.6rem;
     font-weight: 500;
     letter-spacing: 0.2em;
-    color: #1e88e5;
+    color: #c48197;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
 }
@@ -127,7 +134,7 @@ html, body,
 }
 .stTabs [data-baseweb="tab"] {
     background: transparent !important;
-    color: var(--secondary) !important;
+    color: var(--text-muted) !important;
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 0.7rem !important;
     font-weight: 500 !important;
@@ -145,8 +152,8 @@ html, body,
     border-bottom: 2px solid var(--primary) !important;
 }
 .stTabs [data-baseweb="tab"]:hover {
-    color: #7aabde !important;
-    background: #060f1f !important;
+    background: var(--primary-soft) !important;
+    color: var(--primary-dark) !important;
 }
 .stTabs [data-baseweb="tab-panel"] {
     background: #ffffff !important;
@@ -176,17 +183,18 @@ html, body,
 }
 
 /* tooltip icon colour */
-.stNumberInput label + div svg { fill: #1e4976 !important; }
+.stNumberInput label + div svg { fill: #c48197 !important; }
 
 [data-testid="column"] { padding: 0 0.3rem !important; }
 
 .tab-hint {
     font-size: 0.68rem;
-    color: #6a9fd8;
+    color: var(--text-muted) !important;
+    border-left: 2px solid var(--primary) !important;
+    background: #fff0f5;
     letter-spacing: 0.08em;
     margin-bottom: 1.5rem;
     padding: 0.6rem 1rem;
-    border-left: 2px solid #1565c0;
 }
 
 /* ── Predict button ── */
@@ -204,14 +212,14 @@ html, body,
 
 /* ── Result cards ── */
 .result-benign {
-    background: #fce4ec;
-    border-left: 4px solid #c48197;
+    background: #f1fbf3;
+    border-left: 4px solid var(--success);
     color: #4a2e35;
 }
 
 .result-malignant {
     background: #fdecea;
-    border-left: 4px solid #b66681;
+    border-left: 4px solid var(--danger);
     color: #4a2e35;
 }
 .result-label {
@@ -242,7 +250,7 @@ html, body,
     color: var(--text-dark);
     letter-spacing: 0.1em;
     padding: 0.25rem 0.6rem;
-    border: 1px solid #0d2a4a;
+    border: 1px solid #c48197;
     border-radius: 2px;
 }
 
@@ -253,19 +261,19 @@ html, body,
     gap: 0.75rem;
     margin: 2rem 0 1rem 0;
 }
-.chart-head .bar { width: 3px; height: 16px; background: #1565c0; border-radius: 2px; }
+.chart-head .bar { width: 3px; height: 16px; background: var(--primary); border-radius: 2px; }
 .chart-head .title {
     font-family: 'Syne', sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #7aabde;
+    color: var(--primary-dark);
     letter-spacing: 0.15em;
     text-transform: uppercase;
 }
 .chart-head .sub {
     margin-left: auto;
     font-size: 0.6rem;
-    color: #1e4976;
+    color: var(--text-muted);
     letter-spacing: 0.08em;
 }
 
@@ -339,7 +347,7 @@ html, body,
 
 /* All text */
 body, p, span, div, label {
-    color: var(--text-dark) !important;
+    color: var(--text-main) !important;
 }
 
 /* Fix remaining blue texts */
@@ -365,7 +373,7 @@ div[data-testid="stButton"] button {
 }
 
 div[data-testid="stButton"] button:hover {
-    background-color: var(--secondary) !important;
+    background: var(--primary-dark) !important;
 }
 
 /* ───── INPUT BOX FIX ───── */
@@ -482,7 +490,7 @@ def plot_feature_importance(model, feature_names, prediction):
 
     fig, ax = plt.subplots(figsize=(9, 4.2))
     fig.patch.set_facecolor("#fff7fa")
-    ax.set_facecolor("#fff7fa")
+    ax.set_facecolor("#ffffff")
 
     # draw bars in reversed order (most important at top)
     rev_names  = top_names[::-1]
@@ -516,7 +524,7 @@ def plot_feature_importance(model, feature_names, prediction):
         # impact tag (further right)
         ax.text(val + max_val * 0.13, bar.get_y() + bar.get_height() / 2,
                 impact, va="center", ha="left",
-                fontsize=6.5, color="#4a7ab5", fontfamily="monospace")
+                fontsize=6.5, color="#7a5a63", fontfamily="monospace")
 
     # ── Top feature bold y-tick label ─────────────────────────────────────────
     tick_labels = ax.get_yticklabels()
@@ -526,7 +534,7 @@ def plot_feature_importance(model, feature_names, prediction):
             lbl.set_fontweight("bold")
             lbl.set_color("#e8f0fe")
         else:
-            lbl.set_color("#4a7ab5")
+            lbl.set_color("#7a5a63")
 
     ax.set_xlabel("Coefficient Magnitude", color="#3a2b2f")
     ax.tick_params(axis="both", labelsize=7.5, length=0)
