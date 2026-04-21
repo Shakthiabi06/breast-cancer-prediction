@@ -74,7 +74,7 @@ html, body,
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: #1565c0;
+    background: var(--primary) !important;
 }
 .hero-tag {
     font-size: 0.6rem;
@@ -512,7 +512,7 @@ def plot_feature_importance(model, feature_names, prediction):
     # ── Direction label (+/−) and impact label ────────────────────────────────
     for bar, val, sign, name in zip(bars, rev_vals, rev_signs, rev_names):
         direction = "+ Risk" if sign > 0 else "− Risk"
-        dir_color = "#ef9a9a" if sign > 0 else "#90caf9"
+        dir_color = "#b66681" if sign > 0 else "#7a5a63"
         ratio = val / max_val
         impact = "High" if ratio >= 0.66 else ("Moderate" if ratio >= 0.33 else "Low")
 
@@ -532,18 +532,18 @@ def plot_feature_importance(model, feature_names, prediction):
     for lbl in ax.get_yticklabels():
         if lbl.get_text() == rev_names[-1]:
             lbl.set_fontweight("bold")
-            lbl.set_color("#e8f0fe")
+            lbl.set_color("#3a2b2f")
         else:
             lbl.set_color("#7a5a63")
 
     ax.set_xlabel("Coefficient Magnitude", color="#3a2b2f")
     ax.tick_params(axis="both", labelsize=7.5, length=0)
-    ax.tick_params(axis="x", colors="#5a3d45")
+    ax.tick_params(axis="x", colors="#7a5a63")
     for spine in ax.spines.values():
         spine.set_edgecolor("#0d2a4a")
     ax.set_xlim(0, max_val * 1.45)
     ax.invert_yaxis()
-    ax.xaxis.grid(True, color="#0a1f38", linewidth=0.5, linestyle="--")
+    ax.xaxis.grid(True, color="#dfc1cb", linewidth=0.5, linestyle="--")
     ax.set_axisbelow(True)
 
     plt.tight_layout(pad=1.0)
