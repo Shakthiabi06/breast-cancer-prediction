@@ -22,11 +22,21 @@ st.markdown("""
 
 *, *::before, *::after { box-sizing: border-box; }
 
+:root {
+    --primary: #c48197;
+    --secondary: #b66681;
+    --accent: #dfc1cb;
+    --soft: #af8f7e;
+    --deep: #a7816d;
+    --text-dark: #3a2b2f;
+    --text-light: #ffffff;
+}
+
 html, body,
 [data-testid="stAppViewContainer"],
 [data-testid="stApp"] {
-    background-color: #040810 !important;
-    color: #c8d8f0 !important;
+    background-color: #fff7fa !important;
+    color: #3a2b2f !important;
     font-family: 'JetBrains Mono', monospace !important;
 }
 
@@ -148,29 +158,21 @@ html, body,
 
 /* ── Inputs ── */
 .stNumberInput > div > div {
-    background: #040810 !important;
-    border: 1px solid #0d2a4a !important;
-    border-radius: 3px !important;
-    color: #c8d8f0 !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.85rem !important;
+    background: #ffffff !important;
+    border: 1px solid var(--accent) !important;
+    border-radius: 6px !important;
+    color: var(--text-dark) !important;
 }
-.stNumberInput > div > div:focus-within {
-    border-color: #1565c0 !important;
-    box-shadow: 0 0 0 2px #1565c015 !important;
-}
+
 .stNumberInput input {
-    color: #c8d8f0 !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    background: transparent !important;
-}
-.stNumberInput label {
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.62rem !important;
+    color: #2a1f22 !important;
+    background: #ffffff !important;
     font-weight: 500 !important;
-    color: #3a6a9a !important;
-    letter-spacing: 0.1em !important;
-    text-transform: uppercase !important;
+}
+
+.stNumberInput label {
+    color: var(--secondary) !important;
+    font-size: 0.7rem !important;
 }
 
 /* tooltip icon colour */
@@ -189,41 +191,28 @@ html, body,
 
 /* ── Predict button ── */
 .stButton > button {
-    background: #0d47a1 !important;
-    color: #e8f0fe !important;
-    border: 1px solid #1565c0 !important;
-    border-radius: 3px !important;
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 0.85rem !important;
-    letter-spacing: 0.12em !important;
-    text-transform: uppercase !important;
-    padding: 0.7rem 2.5rem !important;
-    transition: all 0.15s ease !important;
+    background: var(--primary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
 }
+
 .stButton > button:hover {
-    background: #1565c0 !important;
-    border-color: #1e88e5 !important;
-    color: #ffffff !important;
+    background: var(--secondary) !important;
 }
 .stButton > button:active { transform: scale(0.99) !important; }
 
 /* ── Result cards ── */
 .result-benign {
-    background: #021a08;
-    border: 1px solid #1b5e20;
-    border-left: 4px solid #2e7d32;
-    border-radius: 4px;
-    padding: 1.75rem 2rem;
-    margin-top: 1.5rem;
+    background: #fce4ec;
+    border-left: 4px solid #c48197;
+    color: #4a2e35;
 }
+
 .result-malignant {
-    background: #1a0202;
-    border: 1px solid #7f0000;
-    border-left: 4px solid #c62828;
-    border-radius: 4px;
-    padding: 1.75rem 2rem;
-    margin-top: 1.5rem;
+    background: #fdecea;
+    border-left: 4px solid #b66681;
+    color: #4a2e35;
 }
 .result-label {
     font-family: 'JetBrains Mono', monospace;
@@ -323,6 +312,28 @@ html, body,
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #040810; }
 ::-webkit-scrollbar-thumb { background: #0d2a4a; border-radius: 2px; }
+            
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column !important;
+        gap: 1rem;
+        padding: 1.5rem !important;
+    }
+
+    .hero-title {
+        font-size: 1.6rem !important;
+        text-align: center;
+    }
+
+    .hero-badges {
+        flex-direction: column !important;
+        width: 100%;
+    }
+
+    .block-container {
+        padding: 1rem !important;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -419,8 +430,8 @@ def plot_feature_importance(model, feature_names, prediction):
         colors.append(tuple(c))
 
     fig, ax = plt.subplots(figsize=(9, 4.2))
-    fig.patch.set_facecolor("#060d1a")
-    ax.set_facecolor("#060d1a")
+    fig.patch.set_facecolor("#fff7fa")
+    ax.set_facecolor("#fff7fa")
 
     # draw bars in reversed order (most important at top)
     rev_names  = top_names[::-1]
@@ -466,10 +477,9 @@ def plot_feature_importance(model, feature_names, prediction):
         else:
             lbl.set_color("#4a7ab5")
 
-    ax.set_xlabel("Coefficient Magnitude", fontsize=7, color="#3a6a9a",
-                  fontfamily="monospace", labelpad=8)
+    ax.set_xlabel("Coefficient Magnitude", color="#3a2b2f")
     ax.tick_params(axis="both", labelsize=7.5, length=0)
-    ax.tick_params(axis="x", colors="#2a4a6a")
+    ax.tick_params(axis="x", colors="#5a3d45")
     for spine in ax.spines.values():
         spine.set_edgecolor("#0d2a4a")
     ax.set_xlim(0, max_val * 1.45)
