@@ -56,8 +56,8 @@ html, body,
     justify-content: space-between;
     padding: 2rem 2.5rem;
     margin-bottom: 2rem;
-    background: #060d1a;
-    border: 1px solid #0d2a4a;
+    background: #ffffff !important;
+    border: 1px solid var(--accent) !important;
     border-radius: 4px;
     position: relative;
     overflow: hidden;
@@ -81,22 +81,22 @@ html, body,
     font-family: 'Syne', sans-serif;
     font-size: 2.4rem;
     font-weight: 800;
-    color: #e8f0fe;
+    color: var(--text-dark) !important;
     line-height: 1.05;
     letter-spacing: -0.02em;
     margin: 0 0 0.4rem 0;
 }
-.hero-title span { color: #1e88e5; }
+.hero-title span { color: var(--primary) !important; }
 .hero-sub {
     font-size: 0.72rem;
-    color: #4a7ab5;
+    color: var(--soft) !important;
     letter-spacing: 0.05em;
     margin: 0;
 }
 .hero-badges { display: flex; gap: 0.75rem; }
 .hero-badge {
-    background: #060f1f;
-    border: 1px solid #0d2a4a;
+    background: #ffffff !important;
+    border: 1px solid var(--accent) !important;
     border-radius: 4px;
     padding: 0.9rem 1.5rem;
     text-align: center;
@@ -106,28 +106,28 @@ html, body,
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.1rem;
     font-weight: 500;
-    color: #90caf9;
+    color: var(--primary) !important;
     display: block;
     letter-spacing: 0.05em;
 }
 .hero-badge .lbl {
     font-size: 0.55rem;
-    color: #3a6a9a;
+    color: var(--secondary) !important;
     letter-spacing: 0.15em;
     text-transform: uppercase;
 }
 
 /* ── Tabs ── */
 .stTabs [data-baseweb="tab-list"] {
-    background: #060d1a !important;
-    border-bottom: 1px solid #0d2a4a !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid var(--accent) !important;
     gap: 0 !important;
     padding: 0 !important;
     border-radius: 4px 4px 0 0 !important;
 }
 .stTabs [data-baseweb="tab"] {
     background: transparent !important;
-    color: #3a6a9a !important;
+    color: var(--secondary) !important;
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 0.7rem !important;
     font-weight: 500 !important;
@@ -141,16 +141,16 @@ html, body,
 }
 .stTabs [aria-selected="true"] {
     background: transparent !important;
-    color: #1e88e5 !important;
-    border-bottom: 2px solid #1e88e5 !important;
+    color: var(--primary) !important;
+    border-bottom: 2px solid var(--primary) !important;
 }
 .stTabs [data-baseweb="tab"]:hover {
     color: #7aabde !important;
     background: #060f1f !important;
 }
 .stTabs [data-baseweb="tab-panel"] {
-    background: #060d1a !important;
-    border: 1px solid #0d2a4a !important;
+    background: #ffffff !important;
+    border: 1px solid var(--accent) !important;
     border-top: none !important;
     border-radius: 0 0 4px 4px !important;
     padding: 2rem !important;
@@ -239,7 +239,7 @@ html, body,
     margin-top: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.62rem;
-    color: #3a6a9a;
+    color: var(--text-dark);
     letter-spacing: 0.1em;
     padding: 0.25rem 0.6rem;
     border: 1px solid #0d2a4a;
@@ -282,28 +282,28 @@ html, body,
     margin-bottom: 1.5rem;
 }
 .disclaimer {
-    background: #060d1a;
-    border: 1px solid #08192e;
+    background: #fff0f5 !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--text-dark) !important;
     border-radius: 4px;
     padding: 1.2rem 1.5rem;
     margin-top: 1.5rem;
     font-size: 0.65rem;
-    color: #2a5a8a;
     letter-spacing: 0.04em;
     line-height: 1.8;
 }
 
 /* ── Bottom bar ── */
 .bottom-bar {
-    background: #060d1a;
-    border: 1px solid #0d2a4a;
+    background: #ffffff !important;
+    border: 1px solid var(--accent) !important;
     border-radius: 4px;
     padding: 1.2rem 2rem;
     margin-top: 2rem;
 }
 .bottom-bar-label {
     font-size: 0.65rem;
-    color: #1e4976;
+    color: var(--secondary) !important;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 0.75rem;
