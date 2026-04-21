@@ -334,8 +334,59 @@ html, body,
         padding: 1rem !important;
     }
 }
+            
+/* ───── FORCE REMOVE STREAMLIT BLUE THEME ───── */
+
+/* All text */
+body, p, span, div, label {
+    color: var(--text-dark) !important;
+}
+
+/* Fix remaining blue texts */
+.tab-hint,
+.chart-head .title,
+.chart-head .sub {
+    color: var(--secondary) !important;
+}
+
+/* Remove blue hover backgrounds */
+.stTabs [data-baseweb="tab"]:hover {
+    background: #fff0f5 !important;
+    color: var(--primary) !important;
+}
+
+/* ───── BUTTON FIX (IMPORTANT) ───── */
+div[data-testid="stButton"] button {
+    background-color: var(--primary) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+div[data-testid="stButton"] button:hover {
+    background-color: var(--secondary) !important;
+}
+
+/* ───── INPUT BOX FIX ───── */
+div[data-baseweb="input"] {
+    background-color: white !important;
+    border-color: var(--accent) !important;
+}
+
+/* ───── TOOLTIP ICON FIX ───── */
+svg {
+    fill: var(--secondary) !important;
+}
+
+/* ───── REMOVE DARK PATCHES ───── */
+[data-testid="stAppViewContainer"] {
+    background-color: #fff7fa !important;
+}
 </style>
 """, unsafe_allow_html=True)
+
+
 
 
 # ── Load model & scaler ───────────────────────────────────────────────────────
