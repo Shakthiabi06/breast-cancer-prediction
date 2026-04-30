@@ -3,10 +3,9 @@ import joblib
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── CONFIG ─────────────────────────────
 st.set_page_config(page_title="Breast Cancer Detection", layout="wide")
 
-# ── THEME ──────────────────────────────
+# ── CSS ─────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
@@ -20,7 +19,6 @@ st.markdown("""
     --text:#140d07;
 }
 
-/* Remove top gap */
 .block-container {padding-top:1rem !important;}
 
 html, body, [data-testid="stAppViewContainer"] {
@@ -31,29 +29,24 @@ html, body, [data-testid="stAppViewContainer"] {
 
 #MainMenu, footer, header {visibility:hidden;}
 
-/* Banner */
 .banner {
     background: linear-gradient(90deg, var(--p3), var(--p5));
-    padding: 1.2rem 1.5rem;
+    padding: 1.2rem;
     border-radius: 10px;
     margin-bottom: 1rem;
     color:white;
 }
+
 .banner h1 {
     font-family:'Syne';
-    margin:0;
     font-size:1.8rem;
-}
-.banner p {
     margin:0;
-    font-size:0.85rem;
 }
 
-/* Inputs */
 label {
-    color:#140d07 !important;
     font-size:0.75rem !important;
     font-weight:500;
+    color:#140d07 !important;
 }
 
 .stNumberInput input {
@@ -63,7 +56,6 @@ label {
     color:#140d07 !important;
 }
 
-/* Button */
 .stButton button {
     background:var(--p4);
     color:white;
@@ -74,105 +66,95 @@ label {
     background:var(--p5);
 }
 
-/* Result */
 .result {
     padding:1.5rem;
     border-radius:10px;
-    margin-top:1.5rem;
+    margin-top:1rem;
 }
+
 .benign {
-    background:#ffe6ec;
-    border-left:5px solid var(--p2);
+    background:#f5f50c;
+    color:#000;
 }
+
 .malignant {
     background:#ffd6dd;
     border-left:5px solid var(--p5);
 }
+
 .small {
     font-size:0.8rem;
-    color:#5c3b42;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# ── LOAD MODEL ─────────────────────────
+# ── LOAD MODEL ───────────────────────
 @st.cache_resource
 def load_model():
-    try:
-        return joblib.load("model.pkl"), joblib.load("scaler.pkl")
-    except:
-        return None, None
+    return joblib.load("model.pkl"), joblib.load("scaler.pkl")
 
 model, scaler = load_model()
 
-# ── BANNER ─────────────────────────────
+# ── HEADER ──────────────────────────
 st.markdown("""
 <div class="banner">
-    <h1>Breast Cancer Detection</h1>
-    <p>AI-powered classification using 30 tumor features</p>
+<h1>Breast Cancer Detection</h1>
 </div>
 """, unsafe_allow_html=True)
 
-# ── FEATURE RANGES (REALISTIC) ─────────
-feature_ranges = {
-    "radius_mean": (6, 30), "texture_mean": (9, 40), "perimeter_mean": (40, 200),
-    "area_mean": (100, 2500), "smoothness_mean": (0.05, 0.2),
-    "compactness_mean": (0.01, 0.4), "concavity_mean": (0, 0.5),
-    "concave points_mean": (0, 0.2), "symmetry_mean": (0.1, 0.35),
-    "fractal_dimension_mean": (0.05, 0.1),
+# ── FEATURE GROUPS ───────────────────
+MEAN = [
+"radius_mean","texture_mean","perimeter_mean","area_mean","smoothness_mean",
+"compactness_mean","concavity_mean","concave points_mean","symmetry_mean","fractal_dimension_mean"
+]
 
-    "radius_se": (0.1, 3), "texture_se": (0.3, 5), "perimeter_se": (0.5, 25),
-    "area_se": (5, 600), "smoothness_se": (0.002, 0.03),
-    "compactness_se": (0.002, 0.15), "concavity_se": (0, 0.4),
-    "concave points_se": (0, 0.05), "symmetry_se": (0.01, 0.08),
-    "fractal_dimension_se": (0.001, 0.03),
+SE = [
+"radius_se","texture_se","perimeter_se","area_se","smoothness_se",
+"compactness_se","concavity_se","concave points_se","symmetry_se","fractal_dimension_se"
+]
 
-    "radius_worst": (7, 40), "texture_worst": (12, 50),
-    "perimeter_worst": (50, 260), "area_worst": (200, 4300),
-    "smoothness_worst": (0.07, 0.25), "compactness_worst": (0.02, 1.1),
-    "concavity_worst": (0, 1.3), "concave points_worst": (0, 0.3),
-    "symmetry_worst": (0.15, 0.7), "fractal_dimension_worst": (0.05, 0.2)
-}
+WORST = [
+"radius_worst","texture_worst","perimeter_worst","area_worst","smoothness_worst",
+"compactness_worst","concavity_worst","concave points_worst","symmetry_worst","fractal_dimension_worst"
+]
 
-features = list(feature_ranges.keys())
-
-# ── INPUT GRID ─────────────────────────
+# ── INPUT TABS ───────────────────────
 inputs = {}
-cols = st.columns(5)
 
-for i, f in enumerate(features):
-    with cols[i % 5]:
-        mn, mx = feature_ranges[f]
-        inputs[f] = st.number_input(
-            f,
-            min_value=float(mn),
-            max_value=float(mx),
-            value=float((mn+mx)/2)
-        )
+tab1, tab2, tab3 = st.tabs(["Mean Features", "Standard Error", "Worst Features"])
 
-# ── PREDICTION ─────────────────────────
+def render(features):
+    cols = st.columns(5)
+    for i, f in enumerate(features):
+        with cols[i % 5]:
+            inputs[f] = st.number_input(f, value=0.0)
+
+with tab1: render(MEAN)
+with tab2: render(SE)
+with tab3: render(WORST)
+
+# ── PREDICT ─────────────────────────
 if st.button("Run Prediction"):
 
-    data = np.array([[inputs[f] for f in features]])
+    all_features = MEAN + SE + WORST
+    data = np.array([[inputs[f] for f in all_features]])
     data = scaler.transform(data)
 
     pred = model.predict(data)[0]
 
-    # confidence fix
     try:
         confidence = max(model.predict_proba(data)[0]) * 100
     except:
         score = model.decision_function(data)[0]
         confidence = min(99, 50 + abs(score)*10)
 
-    # ── RESULT UI ──────────────────────
+    # ── RESULT ──────────────────────
     if pred == 0:
         st.markdown(f"""
         <div class="result benign">
-        <h3>✔ Benign Tumor</h3>
+        <h3>✔ Benign</h3>
         <p class="small">
-        The model predicts this tumor is <b>non-cancerous</b>.
-        Benign tumors do not spread and are usually less harmful.
+        Non-cancerous tumor. Usually does not spread.
         </p>
         <b>Confidence:</b> {confidence:.2f}%
         </div>
@@ -180,35 +162,31 @@ if st.button("Run Prediction"):
     else:
         st.markdown(f"""
         <div class="result malignant">
-        <h3>⚠ Malignant Tumor</h3>
+        <h3>⚠ Malignant</h3>
         <p class="small">
-        The model indicates possible <b>cancerous growth</b>.
-        Immediate medical consultation is strongly recommended.
+        Possible cancerous tumor. Seek medical advice.
         </p>
         <b>Confidence:</b> {confidence:.2f}%
         </div>
         """, unsafe_allow_html=True)
 
-    # ── GRAPH (FIXED COLORS) ───────────
+    # ── GRAPH (FIXED AESTHETIC) ─────
     if hasattr(model, "coef_"):
         imp = np.abs(model.coef_[0])
-        idx = np.argsort(imp)[-10:]
+        idx = np.argsort(imp)[-8:]
 
-        plt.figure(figsize=(7,4))
-        plt.barh([features[i] for i in idx], imp[idx])
-        plt.title("Top Influencing Features")
+        plt.figure(figsize=(6,3))
+        plt.barh([all_features[i] for i in idx], imp[idx], color="#e56d85")
+
+        plt.xticks(fontsize=7, color="#140d07")
+        plt.yticks(fontsize=7, color="#140d07")
+
         plt.gca().set_facecolor("#fff7fa")
         plt.gcf().patch.set_facecolor("#fff7fa")
 
-        # remove blue
-        for bar in plt.gca().patches:
-            bar.set_color("#e56d85")
-
-        plt.xticks(color="#140d07")
-        plt.yticks(color="#140d07")
+        plt.title("Top Features", fontsize=9, color="#140d07")
 
         st.pyplot(plt)
         plt.clf()
 
-# ── DISCLAIMER ─────────────────────────
-st.markdown("⚠ For educational use only. Not a medical diagnosis.")
+st.markdown("⚠ Educational use only")
