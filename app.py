@@ -231,8 +231,7 @@ def render_sync_inputs(features):
                 "Value",
                 min_value=float(low),
                 max_value=float(high_ext),
-                value=float(np.clip(st.session_state[num_key], low, high_ext)),     # ← always safe value
-                key=num_key,
+                key=num_key,                # ← key handles state, no value= needed
                 on_change=sync_num_to_slider
             )
 
