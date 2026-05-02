@@ -112,6 +112,16 @@ div[data-testid="stNumberInput"] button:hover svg {
     fill: #ffffff !important;
     stroke: #ffffff !important;
 }
+            
+div[data-testid="stNumberInput"] div[data-baseweb="input"]:focus-within {
+    border: 1.5px solid #EC769A !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+div[data-testid="stNumberInput"] input[type="number"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
 
 /* Button Styling */
 .stButton button {
@@ -291,6 +301,15 @@ def render_sync_inputs(features):
                 step=round((high_ext - float(low)) / 100, 6),
                 on_change=on_num
             )
+            # Auto-select text on click
+            st.markdown(f"""
+                <script>
+                var inputs = window.parent.document.querySelectorAll('input[type="number"]');
+                inputs.forEach(function(el) {{
+                    el.addEventListener('focus', function() {{ this.select(); }});
+                }});
+                </script>
+            """, unsafe_allow_html=True)
 
         st.session_state.form_data[f] = st.session_state[slider_key]
 
