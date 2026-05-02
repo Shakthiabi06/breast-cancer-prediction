@@ -63,7 +63,7 @@ st.markdown("""
     background-color: #EC769A !important;
 }
 
-/* Number Input — complete BaseWeb override */
+/* Number Input */
 div[data-testid="stNumberInput"] button {
     display: none !important;
 }
@@ -96,7 +96,8 @@ div[data-testid="stNumberInput"] input[type="number"] {
     box-shadow: none !important;
     text-align: center !important;
     caret-color: #EC769A !important;
-    cursor:
+    cursor: text !important;
+}
 
 /* Buttons */
 .stButton button {
@@ -118,7 +119,6 @@ div[data-testid="stNumberInput"] input[type="number"] {
 .primary-btn button:hover {
     background: linear-gradient(135deg, #EC769A, #CC5580) !important;
     box-shadow: 0 6px 20px rgba(236, 118, 154, 0.6) !important;
-    transform: translateY(-1px);
 }
 .secondary-btn button {
     background-color: transparent !important;
@@ -212,7 +212,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── AUTO-SELECT SCRIPT (once, not per input) ──
+# ── AUTO-SELECT SCRIPT ──
 st.markdown("""
 <script>
 window.parent.document.addEventListener('focusin', function(e) {
