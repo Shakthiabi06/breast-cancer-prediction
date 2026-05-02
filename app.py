@@ -28,8 +28,8 @@ st.markdown("""
                       radial-gradient(at 100% 100%, rgba(251,197,198,0.3) 0px, transparent 50%);
 }
 
-/* Header Spacing & Alignment */
-[data-testid="stHeader"] {background: rgba(0,0,0,0); height: 0px;}
+/* Header */
+[data-testid="stHeader"] { background: rgba(0,0,0,0); height: 0px; }
 .main-header {
     margin-top: -50px;
     background: white;
@@ -41,29 +41,13 @@ st.markdown("""
 }
 .main-header h1 { font-family: 'Syne', sans-serif; color: var(--pink-strong); margin: 0; font-size: 2.2rem; }
 
-/* Stat Cards Alignment Fix */
-.stat-card {
-    background: white;
-    padding: 1.2rem;
-    border-radius: 20px;
-    border-bottom: 4px solid var(--pink-mid);
-    text-align: center;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.stat-card h3 { font-size: 0.75rem; color: var(--beige-dark); text-transform: uppercase; margin: 0 0 5px 0; }
-.stat-card p { font-size: 1.4rem; font-weight: 800; color: var(--pink-strong); margin: 0; line-height: 1.2; }
-
-/* Sidebar Visibility */
+/* Sidebar */
 [data-testid="stSidebar"] {
     background-color: white !important;
     border-right: 1px solid var(--beige-light);
 }
 
-/* Slider Styling */
+/* Slider */
 .stSlider [data-baseweb="slider"] [role="slider"] {
     background-color: #EC769A !important;
     border: 2px solid white !important;
@@ -79,76 +63,44 @@ st.markdown("""
     background-color: #EC769A !important;
 }
 
-/* Number Input - unified pill shape */
+/* Number Input — hide +/- buttons, clean styling, no black border */
+div[data-testid="stNumberInput"] button {
+    display: none !important;
+}
 div[data-testid="stNumberInput"] div[data-baseweb="input"] {
     background-color: #fff9f5 !important;
     border: 1.5px solid #EACFB3 !important;
     border-radius: 10px !important;
     overflow: hidden !important;
     padding: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
-div[data-testid="stNumberInput"] input[type="number"] {
-    color: #EC769A !important;
-    font-weight: 700 !important;
-    font-family: 'Syne', sans-serif !important;
-    background-color: #fff9f5 !important;
-    -webkit-text-fill-color: #EC769A !important;
-    border: none !important;
-    border-radius: 0 !important;
-}
-div[data-testid="stNumberInput"] button {
-    background-color: #EC769A !important;
-    border: none !important;
-    border-radius: 0 !important;
-}
-div[data-testid="stNumberInput"] button svg {
-    fill: #ffffff !important;
-    stroke: #ffffff !important;
-}
-div[data-testid="stNumberInput"] button:hover {
-    background-color: #CC5580 !important;
-}
-div[data-testid="stNumberInput"] button:hover svg {
-    fill: #ffffff !important;
-    stroke: #ffffff !important;
-}
-            
 div[data-testid="stNumberInput"] div[data-baseweb="input"]:focus-within {
     border: 1.5px solid #EC769A !important;
-    outline: none !important;
     box-shadow: none !important;
-}
-div[data-testid="stNumberInput"] input[type="number"]:focus {
     outline: none !important;
-    box-shadow: none !important;
 }
-            
-/* Kill BaseWeb focus ring completely */
 div[data-testid="stNumberInput"] div[data-baseweb="input"] * {
     box-shadow: none !important;
     outline: none !important;
 }
-div[data-testid="stNumberInput"] div[data-baseweb="input"]:focus-within {
-    border: 1.5px solid #EC769A !important;
-    box-shadow: none !important;
-    outline: none !important;
-}
 div[data-testid="stNumberInput"] input[type="number"] {
     color: #EC769A !important;
+    -webkit-text-fill-color: #EC769A !important;
     font-weight: 700 !important;
     font-family: 'Syne', sans-serif !important;
     background-color: #fff9f5 !important;
-    -webkit-text-fill-color: #EC769A !important;
     border: none !important;
     border-radius: 10px !important;
     text-align: center !important;
-    caret-color: #EC769A !important;    /* ← pink cursor */
-    cursor: text !important;            /* ← text cursor on hover */
+    caret-color: #EC769A !important;
+    cursor: text !important;
     box-shadow: none !important;
     outline: none !important;
 }
 
-/* Button Styling */
+/* Buttons */
 .stButton button {
     width: 100%;
     border-radius: 12px;
@@ -162,8 +114,8 @@ div[data-testid="stNumberInput"] input[type="number"] {
 
 /* Labels */
 label p { color: var(--text-dark) !important; font-weight: 700 !important; }
-            
-/* Tab Styling */
+
+/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
     gap: 12px;
     background: transparent;
@@ -181,7 +133,7 @@ label p { color: var(--text-dark) !important; font-weight: 700 !important; }
     font-size: 1rem !important;
     padding: 0.75rem 1rem !important;
     transition: all 0.2s ease;
-    opacity: 1 !important;        /* ← forces always visible */
+    opacity: 1 !important;
     visibility: visible !important;
 }
 .stTabs [data-baseweb="tab"]:hover {
@@ -194,33 +146,9 @@ label p { color: var(--text-dark) !important; font-weight: 700 !important; }
     color: white !important;
     border-color: #EC769A !important;
 }
-.stTabs [data-baseweb="tab-highlight"] {
-    display: none;   /* removes the default underline indicator */
-}
-.stTabs [data-baseweb="tab-border"] {
-    display: none;
-}
-            
-/* Hide +/- buttons from number input */
-div[data-testid="stNumberInput"] button {
-    display: none !important;
-}
-div[data-testid="stNumberInput"] div[data-baseweb="input"] {
-    background-color: #fff9f5 !important;
-    border: 1.5px solid #EACFB3 !important;
-    border-radius: 10px !important;
-}
-div[data-testid="stNumberInput"] input[type="number"] {
-    color: #EC769A !important;
-    font-weight: 700 !important;
-    font-family: 'Syne', sans-serif !important;
-    background-color: #fff9f5 !important;
-    -webkit-text-fill-color: #EC769A !important;
-    border: none !important;
-    border-radius: 10px !important;
-    text-align: center !important;
-}
-            
+.stTabs [data-baseweb="tab-highlight"] { display: none; }
+.stTabs [data-baseweb="tab-border"] { display: none; }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -246,9 +174,9 @@ with st.sidebar:
 # ── HEADER ──
 st.markdown('<div class="main-header"><h1>Breast Cancer Prediction</h1><p style="color:#CCB083; font-weight:600;">DIAGNOSTIC DATA INTERFACE</p></div>', unsafe_allow_html=True)
 
-# ── ALIGNED TOP CARDS ──
+# ── TOP CARDS ──
 st.markdown("""
-<div style="display:flex; gap:20px; margin-bottom:2rem; width:100%; text-align:center;">
+<div style="display:flex; gap:20px; margin-bottom:2rem; width:100%;">
     <div style="flex:1; background:white; padding:1.2rem; border-radius:20px; border-bottom:4px solid #FC8EAC; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100px;">
         <p style="font-size:0.75rem; color:#CCB083; text-transform:uppercase; margin:0 0 5px 0; font-weight:700; text-align:center; width:100%;">Validation Score</p>
         <p style="font-size:1.4rem; font-weight:800; color:#EC769A; margin:0; text-align:center; width:100%;">98.2%</p>
@@ -262,6 +190,17 @@ st.markdown("""
         <p style="font-size:1.4rem; font-weight:800; color:#EC769A; margin:0; text-align:center; width:100%;">Ready</p>
     </div>
 </div>
+""", unsafe_allow_html=True)
+
+# ── AUTO-SELECT SCRIPT (once, not per input) ──
+st.markdown("""
+<script>
+window.parent.document.addEventListener('focusin', function(e) {
+    if (e.target && e.target.type === 'number') {
+        e.target.select();
+    }
+});
+</script>
 """, unsafe_allow_html=True)
 
 # ── DATA RANGES ──
@@ -278,9 +217,9 @@ if 'form_data' not in st.session_state:
     st.session_state.form_data = {}
 
 def reset_values():
-    for key in st.session_state.keys():
-        if "slide" in key or "num" in key:
-            del st.session_state[key]
+    keys_to_delete = [k for k in st.session_state.keys() if "slide" in k or "num" in k]
+    for key in keys_to_delete:
+        del st.session_state[key]
     st.rerun()
 
 # ── INPUT TABS ──
@@ -326,15 +265,6 @@ def render_sync_inputs(features):
                 step=round((high_ext - float(low)) / 100, 6),
                 on_change=on_num
             )
-            # Auto-select text on click
-            st.markdown(f"""
-                <script>
-                var inputs = window.parent.document.querySelectorAll('input[type="number"]');
-                inputs.forEach(function(el) {{
-                    el.addEventListener('focus', function() {{ this.select(); }});
-                }});
-                </script>
-            """, unsafe_allow_html=True)
 
         st.session_state.form_data[f] = st.session_state[slider_key]
 
@@ -360,7 +290,7 @@ if analyze and model:
     scaled = scaler.transform(data)
     pred = model.predict(scaled)[0]
     conf = max(model.predict_proba(scaled)[0]) * 100 if hasattr(model, "predict_proba") else 98.0
-    
+
     res = "MALIGNANT" if pred == 1 else "BENIGN"
     clr = "#EC769A" if pred == 1 else "#CCB083"
 
@@ -370,7 +300,6 @@ if analyze and model:
         <p style="color:#2D241E; font-weight:700;">Confidence: {conf:.2f}%</p>
     </div>""", unsafe_allow_html=True)
 
-    # Darkened Graph
     if hasattr(model, "coef_"):
         imp = np.abs(model.coef_[0])
         idx = np.argsort(imp)[-10:]
