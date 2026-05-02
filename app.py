@@ -63,15 +63,25 @@ st.markdown("""
     border-right: 1px solid var(--beige-light);
 }
 
-/* Slider & Input Theming */
-.stSlider [data-baseweb="slider"] [role="slider"] { background-color: var(--pink-strong); border: 2px solid white; }
-.stSlider [data-baseweb="slider"] > div > div { background: var(--pink-soft); }
+/* Slider Styling */
+.stSlider [data-baseweb="slider"] [role="slider"] {
+    background-color: #EC769A !important;
+    border: 2px solid white !important;
+}
+.stSlider [data-baseweb="slider"] > div > div {
+    background: #FBC5C6 !important;
+}
+.stSlider [data-baseweb="slider"] [data-testid="stThumbValue"] {
+    color: #EC769A !important;
+}
 
-/* Number Input Styling */
+/* Number Input - unified pill shape */
 div[data-testid="stNumberInput"] div[data-baseweb="input"] {
     background-color: #fff9f5 !important;
     border: 1.5px solid #EACFB3 !important;
     border-radius: 10px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
 }
 div[data-testid="stNumberInput"] input[type="number"] {
     color: #EC769A !important;
@@ -79,11 +89,13 @@ div[data-testid="stNumberInput"] input[type="number"] {
     font-family: 'Syne', sans-serif !important;
     background-color: #fff9f5 !important;
     -webkit-text-fill-color: #EC769A !important;
+    border: none !important;
+    border-radius: 0 !important;
 }
 div[data-testid="stNumberInput"] button {
     background-color: #EC769A !important;
-    border-color: #EC769A !important;
-    border-radius: 8px !important;
+    border: none !important;
+    border-radius: 0 !important;
 }
 div[data-testid="stNumberInput"] button svg {
     fill: #ffffff !important;
@@ -91,7 +103,6 @@ div[data-testid="stNumberInput"] button svg {
 }
 div[data-testid="stNumberInput"] button:hover {
     background-color: #CC5580 !important;
-    border-color: #CC5580 !important;
 }
 div[data-testid="stNumberInput"] button:hover svg {
     fill: #ffffff !important;
@@ -225,19 +236,20 @@ def render_sync_inputs(features):
         slider_key = f"{f}_slide"
         num_key = f"{f}_num"
 
-        # Initialize state
         if slider_key not in st.session_state:
             st.session_state[slider_key] = float(low)
         if num_key not in st.session_state:
             st.session_state[num_key] = float(low)
 
-        # Callbacks for two-way sync
         def sync_slider_to_num(sk=slider_key, nk=num_key):
             st.session_state[nk] = float(st.session_state[sk])
 
-        def sync_num_to_slider(sk=slider_key, nk=num_key, lo=low, hi=high_ext):
-            raw = st.session_state[nk]
-            st.session_state[sk] = float(np.clip(raw, lo, hi))
+        def sync_num_to_slider(sk=slider_key, nk=num_key, lo=float(low), hi=float(high_ext)):
+            val = st.session_state.get(nk, lo)
+            if val is None:
+                val = lo
+            st.session_state[sk] = float(np.clip(val, lo, hi))
+            st.session_state[nk] = float(np.clip(val, lo, hi))  # ← also clamp num to prevent glitch
 
         col_slider, col_val = st.columns([3, 1])
 
@@ -246,7 +258,7 @@ def render_sync_inputs(features):
                 f.replace("_", " ").title(),
                 min_value=float(low),
                 max_value=float(high_ext),
-                value=float(np.clip(st.session_state[slider_key], low, high_ext)),  # ← always safe value
+                value=float(np.clip(st.session_state[slider_key], low, high_ext)),
                 key=slider_key,
                 on_change=sync_slider_to_num
             )
@@ -255,7 +267,7 @@ def render_sync_inputs(features):
                 "Value",
                 min_value=float(low),
                 max_value=float(high_ext),
-                key=num_key,                # ← key handles state, no value= needed
+                key=num_key,
                 on_change=sync_num_to_slider
             )
 
