@@ -63,27 +63,27 @@ st.markdown("""
     background-color: #EC769A !important;
 }
 
-/* Number Input — hide +/- buttons, clean styling, no black border */
+/* Number Input — complete BaseWeb override */
 div[data-testid="stNumberInput"] button {
     display: none !important;
 }
-div[data-testid="stNumberInput"] div[data-baseweb="input"] {
-    background-color: #fff9f5 !important;
+div[data-testid="stNumberInput"] div[data-baseweb="input"],
+div[data-testid="stNumberInput"] div[data-baseweb="base-input"],
+div[data-testid="stNumberInput"] div[data-baseweb="input"] > div,
+div[data-testid="stNumberInput"] div[data-baseweb="input"]:focus,
+div[data-testid="stNumberInput"] div[data-baseweb="input"]:focus-within,
+div[data-testid="stNumberInput"] div[data-baseweb="input"]:hover,
+div[data-testid="stNumberInput"] div[data-baseweb="input"] *,
+div[data-testid="stNumberInput"] div[data-baseweb="input"] *:focus,
+div[data-testid="stNumberInput"] div[data-baseweb="input"] *:focus-within {
     border: 1.5px solid #EACFB3 !important;
-    border-radius: 10px !important;
-    overflow: hidden !important;
-    padding: 0 !important;
     box-shadow: none !important;
     outline: none !important;
+    border-radius: 10px !important;
+    background-color: #fff9f5 !important;
 }
 div[data-testid="stNumberInput"] div[data-baseweb="input"]:focus-within {
     border: 1.5px solid #EC769A !important;
-    box-shadow: none !important;
-    outline: none !important;
-}
-div[data-testid="stNumberInput"] div[data-baseweb="input"] * {
-    box-shadow: none !important;
-    outline: none !important;
 }
 div[data-testid="stNumberInput"] input[type="number"] {
     color: #EC769A !important;
@@ -92,13 +92,11 @@ div[data-testid="stNumberInput"] input[type="number"] {
     font-family: 'Syne', sans-serif !important;
     background-color: #fff9f5 !important;
     border: none !important;
-    border-radius: 10px !important;
+    outline: none !important;
+    box-shadow: none !important;
     text-align: center !important;
     caret-color: #EC769A !important;
-    cursor: text !important;
-    box-shadow: none !important;
-    outline: none !important;
-}
+    cursor:
 
 /* Buttons */
 .stButton button {
