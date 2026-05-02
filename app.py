@@ -80,20 +80,33 @@ div[data-testid="stNumberInput"] input[type="number"] {
     background-color: #fff9f5 !important;
     -webkit-text-fill-color: #EC769A !important;
 }
-div[data-testid="stNumberInput"] button[kind="plus"],
-div[data-testid="stNumberInput"] button[kind="minus"] {
-    background-color: #FC8EAC !important;
+
+/* + button — pink background, white symbol */
+div[data-testid="stNumberInput"] button:last-child {
+    background-color: #EC769A !important;
     border-color: #EC769A !important;
-    border-radius: 8px !important;
+    border-radius: 0 8px 8px 0 !important;
 }
-div[data-testid="stNumberInput"] button[kind="plus"] svg,
-div[data-testid="stNumberInput"] button[kind="minus"] svg {
+div[data-testid="stNumberInput"] button:last-child svg {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+}
+div[data-testid="stNumberInput"] button:last-child:hover {
+    background-color: #FC8EAC !important;
+}
+
+/* - button — beige background, dark symbol */
+div[data-testid="stNumberInput"] button:first-of-type {
+    background-color: #EACFB3 !important;
+    border-color: #EACFB3 !important;
+    border-radius: 8px 0 0 8px !important;
+}
+div[data-testid="stNumberInput"] button:first-of-type svg {
     fill: #2D241E !important;
     stroke: #2D241E !important;
 }
-div[data-testid="stNumberInput"] button[kind="plus"]:hover,
-div[data-testid="stNumberInput"] button[kind="minus"]:hover {
-    background-color: #EC769A !important;
+div[data-testid="stNumberInput"] button:first-of-type:hover {
+    background-color: #CCB083 !important;
 }
 
 /* Button Styling */
