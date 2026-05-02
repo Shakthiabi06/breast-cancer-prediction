@@ -69,9 +69,23 @@ st.markdown("""
 
 /* Number Input Styling */
 div[data-testid="stNumberInput"] div[data-baseweb="input"] {
-    background-color: white !important;
-    border: 1.5px solid var(--beige-light) !important;
-    color: var(--text-dark) !important;
+    background-color: #fff9f5 !important;
+    border: 1.5px solid #EACFB3 !important;
+    border-radius: 10px !important;
+}
+div[data-testid="stNumberInput"] input {
+    color: #EC769A !important;
+    font-weight: 700 !important;
+    font-family: 'Syne', sans-serif !important;
+}
+div[data-testid="stNumberInput"] button {
+    color: #CCB083 !important;
+    border-color: #EACFB3 !important;
+    background-color: #fff9f5 !important;
+}
+div[data-testid="stNumberInput"] button:hover {
+    background-color: #FBC5C6 !important;
+    color: #EC769A !important;
 }
 
 /* Button Styling */
