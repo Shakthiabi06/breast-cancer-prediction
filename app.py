@@ -142,6 +142,8 @@ st.markdown("""
     text-transform: uppercase;
     margin: 0 0 5px 0;
     font-weight: 700;
+    text-align: center;
+    width: 100%; 
 }
 .stat-card-aligned p {
     font-size: 1.4rem;
