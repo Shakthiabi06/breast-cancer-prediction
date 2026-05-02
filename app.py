@@ -102,13 +102,35 @@ div[data-testid="stNumberInput"] input[type="number"] {
 .stButton button {
     width: 100%;
     border-radius: 12px;
-    padding: 0.6rem;
+    padding: 0.6rem 1.2rem;
     font-family: 'Syne', sans-serif;
     font-weight: 800;
+    font-size: 1rem;
     transition: 0.3s;
+    border: none !important;
 }
-.primary-btn button { background-color: var(--pink-strong) !important; color: white !important; border: none !important; font-size: 1.1rem; }
-.secondary-btn button { background-color: transparent !important; color: var(--beige-dark) !important; border: 1px solid var(--beige-light) !important; }
+.primary-btn button {
+    background: linear-gradient(135deg, #FC8EAC, #EC769A) !important;
+    color: white !important;
+    font-size: 1.1rem !important;
+    box-shadow: 0 4px 15px rgba(236, 118, 154, 0.4) !important;
+}
+.primary-btn button:hover {
+    background: linear-gradient(135deg, #EC769A, #CC5580) !important;
+    box-shadow: 0 6px 20px rgba(236, 118, 154, 0.6) !important;
+    transform: translateY(-1px);
+}
+.secondary-btn button {
+    background-color: transparent !important;
+    color: #CCB083 !important;
+    border: 1.5px solid #EACFB3 !important;
+    font-size: 0.9rem !important;
+}
+.secondary-btn button:hover {
+    background-color: #FBC5C6 !important;
+    color: #EC769A !important;
+    border-color: #FC8EAC !important;
+}
 
 /* Labels */
 label p { color: var(--text-dark) !important; font-weight: 700 !important; }
@@ -271,12 +293,12 @@ with tab2: render_sync_inputs(get_feats("se"))
 with tab3: render_sync_inputs(get_feats("worst"))
 
 # ── BUTTONS ──
-cb1, cb2 = st.columns([4, 1])
+cb1, cb2, cb3 = st.columns([3, 1, 1])
 with cb1:
     st.markdown('<div class="primary-btn">', unsafe_allow_html=True)
     analyze = st.button("GENERATE ANALYSIS")
     st.markdown('</div>', unsafe_allow_html=True)
-with cb2:
+with cb3:
     st.markdown('<div class="secondary-btn">', unsafe_allow_html=True)
     st.button("RESET", on_click=reset_values)
     st.markdown('</div>', unsafe_allow_html=True)
