@@ -166,6 +166,26 @@ label p { color: var(--text-dark) !important; font-weight: 700 !important; }
     display: none;
 }
             
+/* Hide +/- buttons from number input */
+div[data-testid="stNumberInput"] button {
+    display: none !important;
+}
+div[data-testid="stNumberInput"] div[data-baseweb="input"] {
+    background-color: #fff9f5 !important;
+    border: 1.5px solid #EACFB3 !important;
+    border-radius: 10px !important;
+}
+div[data-testid="stNumberInput"] input[type="number"] {
+    color: #EC769A !important;
+    font-weight: 700 !important;
+    font-family: 'Syne', sans-serif !important;
+    background-color: #fff9f5 !important;
+    -webkit-text-fill-color: #EC769A !important;
+    border: none !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+}
+            
 </style>
 """, unsafe_allow_html=True)
 
@@ -240,7 +260,6 @@ def render_sync_inputs(features):
         slider_key = f"{f}_slide"
         num_key = f"{f}_num"
 
-        # Initialize widget keys directly — no separate state needed
         if slider_key not in st.session_state:
             st.session_state[slider_key] = float(low)
         if num_key not in st.session_state:
@@ -260,7 +279,7 @@ def render_sync_inputs(features):
                 min_value=float(low),
                 max_value=float(high_ext),
                 key=slider_key,
-                on_change=on_slider   # slider → updates num
+                on_change=on_slider
             )
 
         with col_val:
@@ -270,7 +289,7 @@ def render_sync_inputs(features):
                 max_value=float(high_ext),
                 key=num_key,
                 step=round((high_ext - float(low)) / 100, 6),
-                on_change=on_num      # num → updates slider
+                on_change=on_num
             )
 
         st.session_state.form_data[f] = st.session_state[slider_key]
