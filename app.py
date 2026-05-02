@@ -113,16 +113,12 @@ with st.sidebar:
 # ── HEADER ──
 st.markdown('<div class="main-header"><h1>Breast Cancer Prediction</h1><p style="color:#CCB083; font-weight:600;">DIAGNOSTIC DATA INTERFACE</p></div>', unsafe_allow_html=True)
 
-# ── ALIGNED TOP CARDS (STRICT FLEXBOX ALIGNMENT) ──
-st.markdown("""
-<div style="
-    display: flex; 
-    justify-content: space-between; 
-    gap: 20px; 
-    margin-bottom: 2rem;
-">
+# ── ALIGNED TOP CARDS (CENTER ALIGNED) ──
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
     <div style="
-        flex: 1;
         background: white;
         padding: 1.2rem;
         border-radius: 20px;
@@ -133,8 +129,11 @@ st.markdown("""
         <h3 style="font-size: 0.75rem; color: #CCB083; text-transform: uppercase; margin: 0 0 5px 0;">Validation Score</h3>
         <p style="font-size: 1.4rem; font-weight: 800; color: #EC769A; margin: 0;">98.2%</p>
     </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
     <div style="
-        flex: 1;
         background: white;
         padding: 1.2rem;
         border-radius: 20px;
@@ -145,8 +144,11 @@ st.markdown("""
         <h3 style="font-size: 0.75rem; color: #CCB083; text-transform: uppercase; margin: 0 0 5px 0;">Analysis Speed</h3>
         <p style="font-size: 1.4rem; font-weight: 800; color: #EC769A; margin: 0;">Real-time</p>
     </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
     <div style="
-        flex: 1;
         background: white;
         padding: 1.2rem;
         border-radius: 20px;
@@ -157,8 +159,7 @@ st.markdown("""
         <h3 style="font-size: 0.75rem; color: #CCB083; text-transform: uppercase; margin: 0 0 5px 0;">System Status</h3>
         <p style="font-size: 1.4rem; font-weight: 800; color: #EC769A; margin: 0;">Ready</p>
     </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 # ── DATA RANGES ──
 BOUNDS = {
