@@ -115,59 +115,18 @@ st.markdown('<div class="main-header"><h1>Breast Cancer Prediction</h1><p style=
 
 # ── ALIGNED TOP CARDS ──
 st.markdown("""
-<style>
-.card-container {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 2rem;
-    width: 100%;
-}
-.stat-card-aligned {
-    flex: 1;
-    background: white;
-    padding: 1.2rem;
-    border-radius: 20px;
-    border-bottom: 4px solid #FC8EAC;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;  
-    min-height: 100px;
-}
-.stat-card-aligned h3 {
-    font-size: 0.75rem;
-    color: #CCB083;
-    text-transform: uppercase;
-    margin: 0 0 5px 0;
-    font-weight: 700;
-    text-align: center;
-    width: 100%; 
-}
-.stat-card-aligned p {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #EC769A;
-    margin: 0;
-    line-height: 1.2;
-    text-align: center;
-    width: 100%
-}
-</style>
-
-<div class="card-container">
-    <div class="stat-card-aligned">
-        <h3>Validation Score</h3>
-        <p>98.2%</p>
+<div style="display:flex; gap:20px; margin-bottom:2rem; width:100%; text-align:center;">
+    <div style="flex:1; background:white; padding:1.2rem; border-radius:20px; border-bottom:4px solid #FC8EAC; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100px;">
+        <p style="font-size:0.75rem; color:#CCB083; text-transform:uppercase; margin:0 0 5px 0; font-weight:700; text-align:center; width:100%;">Validation Score</p>
+        <p style="font-size:1.4rem; font-weight:800; color:#EC769A; margin:0; text-align:center; width:100%;">98.2%</p>
     </div>
-    <div class="stat-card-aligned">
-        <h3>Analysis Speed</h3>
-        <p>Real-time</p>
+    <div style="flex:1; background:white; padding:1.2rem; border-radius:20px; border-bottom:4px solid #FC8EAC; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100px;">
+        <p style="font-size:0.75rem; color:#CCB083; text-transform:uppercase; margin:0 0 5px 0; font-weight:700; text-align:center; width:100%;">Analysis Speed</p>
+        <p style="font-size:1.4rem; font-weight:800; color:#EC769A; margin:0; text-align:center; width:100%;">Real-time</p>
     </div>
-    <div class="stat-card-aligned">
-        <h3>System Status</h3>
-        <p>Ready</p>
+    <div style="flex:1; background:white; padding:1.2rem; border-radius:20px; border-bottom:4px solid #FC8EAC; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100px;">
+        <p style="font-size:0.75rem; color:#CCB083; text-transform:uppercase; margin:0 0 5px 0; font-weight:700; text-align:center; width:100%;">System Status</p>
+        <p style="font-size:1.4rem; font-weight:800; color:#EC769A; margin:0; text-align:center; width:100%;">Ready</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
