@@ -110,27 +110,6 @@ div[data-testid="stNumberInput"] input[type="number"] {
     transition: 0.3s;
     border: none !important;
 }
-.primary-btn button {
-    background: linear-gradient(135deg, #FC8EAC, #EC769A) !important;
-    color: white !important;
-    font-size: 1.1rem !important;
-    box-shadow: 0 4px 15px rgba(236, 118, 154, 0.4) !important;
-}
-.primary-btn button:hover {
-    background: linear-gradient(135deg, #EC769A, #CC5580) !important;
-    box-shadow: 0 6px 20px rgba(236, 118, 154, 0.6) !important;
-}
-.secondary-btn button {
-    background-color: transparent !important;
-    color: #CCB083 !important;
-    border: 1.5px solid #EACFB3 !important;
-    font-size: 0.9rem !important;
-}
-.secondary-btn button:hover {
-    background-color: #FBC5C6 !important;
-    color: #EC769A !important;
-    border-color: #FC8EAC !important;
-}
 
 /* Labels */
 label p { color: var(--text-dark) !important; font-weight: 700 !important; }
@@ -295,13 +274,33 @@ with tab3: render_sync_inputs(get_feats("worst"))
 # ── BUTTONS ──
 cb1, cb2, cb3 = st.columns([3, 1, 1])
 with cb1:
-    st.markdown('<div class="primary-btn">', unsafe_allow_html=True)
-    analyze = st.button("GENERATE ANALYSIS")
-    st.markdown('</div>', unsafe_allow_html=True)
+    analyze = st.button("GENERATE ANALYSIS", key="analyze_btn")
 with cb3:
-    st.markdown('<div class="secondary-btn">', unsafe_allow_html=True)
-    st.button("RESET", on_click=reset_values)
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.button("RESET", on_click=reset_values, key="reset_btn")
+
+st.markdown("""
+<style>
+button[kind="primary"], div.stButton > button {
+    background: linear-gradient(135deg, #FC8EAC, #EC769A) !important;
+    color: white !important;
+    border: none !important;
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 800 !important;
+}
+div[data-testid="column"]:last-child div.stButton > button {
+    background: transparent !important;
+    color: #CCB083 !important;
+    border: 1.5px solid #EACFB3 !important;
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 800 !important;
+}
+div[data-testid="column"]:last-child div.stButton > button:hover {
+    background: #FBC5C6 !important;
+    color: #EC769A !important;
+    border-color: #FC8EAC !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # ── ANALYSIS ──
 if analyze and model:
