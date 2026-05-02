@@ -207,19 +207,21 @@ def render_sync_inputs(features):
         if num_key not in st.session_state:
             st.session_state[num_key] = low
 
-        # Sync: if number input changed, update slider
-        if st.session_state[num_key] != st.session_state[slider_key]:
-            st.session_state[slider_key] = float(
-                np.clip(st.session_state[num_key], low, high_ext)
-            )
+        # Callbacks for two-way sync
+        def sync_slider_to_num(sk=slider_key, nk=num_key):
+            st.session_state[nk] = st.session_state[sk]
+
+        def sync_num_to_slider(sk=slider_key, nk=num_key):
+            st.session_state[sk] = float(np.clip(st.session_state[nk], low, high_ext))
 
         col_slider, col_val = st.columns([3, 1])
 
         with col_slider:
-            val = st.slider(
+            st.slider(
                 f.replace("_", " ").title(),
                 low, high_ext,
-                key=slider_key
+                key=slider_key,
+                on_change=sync_slider_to_num  # ← slider updates number
             )
         with col_val:
             st.number_input(
@@ -227,7 +229,7 @@ def render_sync_inputs(features):
                 min_value=low,
                 max_value=high_ext,
                 key=num_key,
-                value=st.session_state[slider_key]  # always mirrors slider
+                on_change=sync_num_to_slider  # ← number updates slider
             )
 
         st.session_state.form_data[f] = st.session_state[slider_key]
