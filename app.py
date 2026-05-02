@@ -122,6 +122,31 @@ div[data-testid="stNumberInput"] input[type="number"]:focus {
     outline: none !important;
     box-shadow: none !important;
 }
+            
+/* Kill BaseWeb focus ring completely */
+div[data-testid="stNumberInput"] div[data-baseweb="input"] * {
+    box-shadow: none !important;
+    outline: none !important;
+}
+div[data-testid="stNumberInput"] div[data-baseweb="input"]:focus-within {
+    border: 1.5px solid #EC769A !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+div[data-testid="stNumberInput"] input[type="number"] {
+    color: #EC769A !important;
+    font-weight: 700 !important;
+    font-family: 'Syne', sans-serif !important;
+    background-color: #fff9f5 !important;
+    -webkit-text-fill-color: #EC769A !important;
+    border: none !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    caret-color: #EC769A !important;    /* ← pink cursor */
+    cursor: text !important;            /* ← text cursor on hover */
+    box-shadow: none !important;
+    outline: none !important;
+}
 
 /* Button Styling */
 .stButton button {
