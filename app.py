@@ -73,19 +73,27 @@ div[data-testid="stNumberInput"] div[data-baseweb="input"] {
     border: 1.5px solid #EACFB3 !important;
     border-radius: 10px !important;
 }
-div[data-testid="stNumberInput"] input {
+div[data-testid="stNumberInput"] input[type="number"] {
     color: #EC769A !important;
     font-weight: 700 !important;
     font-family: 'Syne', sans-serif !important;
-}
-div[data-testid="stNumberInput"] button {
-    color: #CCB083 !important;
-    border-color: #EACFB3 !important;
     background-color: #fff9f5 !important;
+    -webkit-text-fill-color: #EC769A !important;
 }
-div[data-testid="stNumberInput"] button:hover {
-    background-color: #FBC5C6 !important;
-    color: #EC769A !important;
+div[data-testid="stNumberInput"] button[kind="plus"],
+div[data-testid="stNumberInput"] button[kind="minus"] {
+    background-color: #FC8EAC !important;
+    border-color: #EC769A !important;
+    border-radius: 8px !important;
+}
+div[data-testid="stNumberInput"] button[kind="plus"] svg,
+div[data-testid="stNumberInput"] button[kind="minus"] svg {
+    fill: #2D241E !important;
+    stroke: #2D241E !important;
+}
+div[data-testid="stNumberInput"] button[kind="plus"]:hover,
+div[data-testid="stNumberInput"] button[kind="minus"]:hover {
+    background-color: #EC769A !important;
 }
 
 /* Button Styling */
