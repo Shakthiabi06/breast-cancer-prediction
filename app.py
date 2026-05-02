@@ -247,20 +247,6 @@ def render_sync_inputs(features):
 
         col_slider, col_val = st.columns([3, 1])
 
-        with col_val:
-            new_num = st.number_input(
-                "Value",
-                min_value=float(low),
-                max_value=float(high_ext),
-                value=float(np.clip(st.session_state[slider_key], low, high_ext)),
-                key=num_key,
-                step=(high_ext - float(low)) / 100
-            )
-            # If number changed, update slider state
-            if new_num != st.session_state[slider_key]:
-                st.session_state[slider_key] = float(np.clip(new_num, low, high_ext))
-                st.rerun()
-
         with col_slider:
             new_slider = st.slider(
                 f.replace("_", " ").title(),
@@ -270,7 +256,23 @@ def render_sync_inputs(features):
                 key=slider_key
             )
             if new_slider != st.session_state[num_key]:
-                st.session_state[num_key] = new_slider
+                st.session_state[num_key] = float(new_slider)
+                st.session_state[slider_key] = float(new_slider)
+                st.rerun()
+
+        with col_val:
+            new_num = st.number_input(
+                "Value",
+                min_value=float(low),
+                max_value=float(high_ext),
+                value=float(np.clip(st.session_state[num_key], low, high_ext)),
+                key=num_key,
+                step=round((high_ext - float(low)) / 100, 6)
+            )
+            if new_num != st.session_state[slider_key]:
+                st.session_state[slider_key] = float(np.clip(new_num, low, high_ext))
+                st.session_state[num_key] = float(np.clip(new_num, low, high_ext))
+                st.rerun()
 
         st.session_state.form_data[f] = st.session_state[slider_key]
 
