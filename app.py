@@ -196,19 +196,41 @@ def render_sync_inputs(features):
     for f in features:
         root = f.split("_")[0]
         low, high = BOUNDS.get(root, (0.0, 1.0))
-        
-        col_slider, col_val = st.columns([3, 1])
-        
-        # State Management for Synchronization
+        high_ext = round(high * 1.2, 4)
+
         slider_key = f"{f}_slide"
         num_key = f"{f}_num"
-        
+
+        # Initialize state
+        if slider_key not in st.session_state:
+            st.session_state[slider_key] = low
+        if num_key not in st.session_state:
+            st.session_state[num_key] = low
+
+        # Sync: if number input changed, update slider
+        if st.session_state[num_key] != st.session_state[slider_key]:
+            st.session_state[slider_key] = float(
+                np.clip(st.session_state[num_key], low, high_ext)
+            )
+
+        col_slider, col_val = st.columns([3, 1])
+
         with col_slider:
-            val = st.slider(f.replace("_", " ").title(), low, high*1.2, low, key=slider_key)
+            val = st.slider(
+                f.replace("_", " ").title(),
+                low, high_ext,
+                key=slider_key
+            )
         with col_val:
-            # Tie number input directly to slider state
-            final_val = st.number_input("Value", value=val, key=num_key)
-            st.session_state.form_data[f] = final_val
+            st.number_input(
+                "Value",
+                min_value=low,
+                max_value=high_ext,
+                key=num_key,
+                value=st.session_state[slider_key]  # always mirrors slider
+            )
+
+        st.session_state.form_data[f] = st.session_state[slider_key]
 
 with tab1: render_sync_inputs(get_feats("mean"))
 with tab2: render_sync_inputs(get_feats("se"))
