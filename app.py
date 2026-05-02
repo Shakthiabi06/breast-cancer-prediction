@@ -113,11 +113,29 @@ with st.sidebar:
 # ── HEADER ──
 st.markdown('<div class="main-header"><h1>Breast Cancer Prediction</h1><p style="color:#CCB083; font-weight:600;">DIAGNOSTIC DATA INTERFACE</p></div>', unsafe_allow_html=True)
 
-# ── ALIGNED TOP CARDS ──
-c1, c2, c3 = st.columns(3)
-with c1: st.markdown('<div class="stat-card"><h3>Validation Score</h3><p>98.2%</p></div>', unsafe_allow_html=True)
-with c2: st.markdown('<div class="stat-card"><h3>Analysis Speed</h3><p>Real-time</p></div>', unsafe_allow_html=True)
-with c3: st.markdown('<div class="stat-card"><h3>System Status</h3><p>Ready</p></div>', unsafe_allow_html=True)
+# ── ALIGNED TOP CARDS (STRICT FLEXBOX ALIGNMENT) ──
+st.markdown("""
+<div style="
+    display: flex; 
+    justify-content: space-between; 
+    gap: 20px; 
+    margin-bottom: 2rem; 
+    align-items: stretch;
+">
+    <div class="stat-card" style="flex: 1;">
+        <h3>Validation Score</h3>
+        <p>98.2%</p>
+    </div>
+    <div class="stat-card" style="flex: 1;">
+        <h3>Analysis Speed</h3>
+        <p>Real-time</p>
+    </div>
+    <div class="stat-card" style="flex: 1;">
+        <h3>System Status</h3>
+        <p>Ready</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # ── DATA RANGES ──
 BOUNDS = {
