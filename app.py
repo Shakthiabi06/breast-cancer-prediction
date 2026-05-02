@@ -67,12 +67,16 @@ st.markdown("""
 .stSlider [data-baseweb="slider"] [role="slider"] {
     background-color: #EC769A !important;
     border: 2px solid white !important;
+    box-shadow: 0 0 0 4px #FBC5C6 !important;
+}
+.stSlider [data-baseweb="slider"] > div > div > div {
+    background: #EC769A !important;
 }
 .stSlider [data-baseweb="slider"] > div > div {
-    background: #FBC5C6 !important;
+    background: #EACFB3 !important;
 }
-.stSlider [data-baseweb="slider"] [data-testid="stThumbValue"] {
-    color: #EC769A !important;
+[data-testid="stSlider"] [data-baseweb="slider"] div[role="progressbar"] {
+    background-color: #EC769A !important;
 }
 
 /* Number Input - unified pill shape */
@@ -236,20 +240,17 @@ def render_sync_inputs(features):
         slider_key = f"{f}_slide"
         num_key = f"{f}_num"
 
+        # Single source of truth: slider key
         if slider_key not in st.session_state:
             st.session_state[slider_key] = float(low)
-        if num_key not in st.session_state:
-            st.session_state[num_key] = float(low)
 
-        def sync_slider_to_num(sk=slider_key, nk=num_key):
-            st.session_state[nk] = float(st.session_state[sk])
+        def on_slider_change(sk=slider_key, nk=num_key):
+            st.session_state[nk] = st.session_state[sk]
 
-        def sync_num_to_slider(sk=slider_key, nk=num_key, lo=float(low), hi=float(high_ext)):
-            val = st.session_state.get(nk, lo)
-            if val is None:
-                val = lo
-            st.session_state[sk] = float(np.clip(val, lo, hi))
-            st.session_state[nk] = float(np.clip(val, lo, hi))  # ← also clamp num to prevent glitch
+        def on_num_change(sk=slider_key, nk=num_key, lo=float(low), hi=float(high_ext)):
+            clamped = float(np.clip(st.session_state[nk], lo, hi))
+            st.session_state[sk] = clamped
+            st.session_state[nk] = clamped
 
         col_slider, col_val = st.columns([3, 1])
 
@@ -258,17 +259,21 @@ def render_sync_inputs(features):
                 f.replace("_", " ").title(),
                 min_value=float(low),
                 max_value=float(high_ext),
-                value=float(np.clip(st.session_state[slider_key], low, high_ext)),
                 key=slider_key,
-                on_change=sync_slider_to_num
+                on_change=on_slider_change
             )
+
         with col_val:
+            # Always initialize num from slider before rendering
+            if num_key not in st.session_state:
+                st.session_state[num_key] = st.session_state[slider_key]
+
             st.number_input(
                 "Value",
                 min_value=float(low),
                 max_value=float(high_ext),
                 key=num_key,
-                on_change=sync_num_to_slider
+                on_change=on_num_change
             )
 
         st.session_state.form_data[f] = st.session_state[slider_key]
