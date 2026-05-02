@@ -119,20 +119,43 @@ st.markdown("""
     display: flex; 
     justify-content: space-between; 
     gap: 20px; 
-    margin-bottom: 2rem; 
-    align-items: stretch;
+    margin-bottom: 2rem;
 ">
-    <div class="stat-card" style="flex: 1;">
-        <h3>Validation Score</h3>
-        <p>98.2%</p>
+    <div style="
+        flex: 1;
+        background: white;
+        padding: 1.2rem;
+        border-radius: 20px;
+        border-bottom: 4px solid #FC8EAC;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    ">
+        <h3 style="font-size: 0.75rem; color: #CCB083; text-transform: uppercase; margin: 0 0 5px 0;">Validation Score</h3>
+        <p style="font-size: 1.4rem; font-weight: 800; color: #EC769A; margin: 0;">98.2%</p>
     </div>
-    <div class="stat-card" style="flex: 1;">
-        <h3>Analysis Speed</h3>
-        <p>Real-time</p>
+    <div style="
+        flex: 1;
+        background: white;
+        padding: 1.2rem;
+        border-radius: 20px;
+        border-bottom: 4px solid #FC8EAC;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    ">
+        <h3 style="font-size: 0.75rem; color: #CCB083; text-transform: uppercase; margin: 0 0 5px 0;">Analysis Speed</h3>
+        <p style="font-size: 1.4rem; font-weight: 800; color: #EC769A; margin: 0;">Real-time</p>
     </div>
-    <div class="stat-card" style="flex: 1;">
-        <h3>System Status</h3>
-        <p>Ready</p>
+    <div style="
+        flex: 1;
+        background: white;
+        padding: 1.2rem;
+        border-radius: 20px;
+        border-bottom: 4px solid #FC8EAC;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    ">
+        <h3 style="font-size: 0.75rem; color: #CCB083; text-transform: uppercase; margin: 0 0 5px 0;">System Status</h3>
+        <p style="font-size: 1.4rem; font-weight: 800; color: #EC769A; margin: 0;">Ready</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
