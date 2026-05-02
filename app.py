@@ -239,11 +239,14 @@ def render_sync_inputs(features):
 
         slider_key = f"{f}_slide"
         num_key = f"{f}_num"
+        # Internal state keys — not tied to any widget
+        slider_state = f"{f}_slide_state"
+        num_state = f"{f}_num_state"
 
-        if slider_key not in st.session_state:
-            st.session_state[slider_key] = float(low)
-        if num_key not in st.session_state:
-            st.session_state[num_key] = float(low)
+        if slider_state not in st.session_state:
+            st.session_state[slider_state] = float(low)
+        if num_state not in st.session_state:
+            st.session_state[num_state] = float(low)
 
         col_slider, col_val = st.columns([3, 1])
 
@@ -252,12 +255,12 @@ def render_sync_inputs(features):
                 f.replace("_", " ").title(),
                 min_value=float(low),
                 max_value=float(high_ext),
-                value=st.session_state[slider_key],
+                value=st.session_state[slider_state],
                 key=slider_key
             )
-            if new_slider != st.session_state[num_key]:
-                st.session_state[num_key] = float(new_slider)
-                st.session_state[slider_key] = float(new_slider)
+            if new_slider != st.session_state[slider_state]:
+                st.session_state[slider_state] = float(new_slider)
+                st.session_state[num_state] = float(new_slider)
                 st.rerun()
 
         with col_val:
@@ -265,16 +268,17 @@ def render_sync_inputs(features):
                 "Value",
                 min_value=float(low),
                 max_value=float(high_ext),
-                value=float(np.clip(st.session_state[num_key], low, high_ext)),
+                value=float(np.clip(st.session_state[num_state], low, high_ext)),
                 key=num_key,
                 step=round((high_ext - float(low)) / 100, 6)
             )
-            if new_num != st.session_state[slider_key]:
-                st.session_state[slider_key] = float(np.clip(new_num, low, high_ext))
-                st.session_state[num_key] = float(np.clip(new_num, low, high_ext))
+            if new_num != st.session_state[num_state]:
+                clamped = float(np.clip(new_num, low, high_ext))
+                st.session_state[slider_state] = clamped
+                st.session_state[num_state] = clamped
                 st.rerun()
 
-        st.session_state.form_data[f] = st.session_state[slider_key]
+        st.session_state.form_data[f] = st.session_state[slider_state]
 
 with tab1: render_sync_inputs(get_feats("mean"))
 with tab2: render_sync_inputs(get_feats("se"))
