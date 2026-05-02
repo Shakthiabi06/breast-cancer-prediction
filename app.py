@@ -80,33 +80,22 @@ div[data-testid="stNumberInput"] input[type="number"] {
     background-color: #fff9f5 !important;
     -webkit-text-fill-color: #EC769A !important;
 }
-
-/* + button — pink background, white symbol */
-div[data-testid="stNumberInput"] button:last-child {
+div[data-testid="stNumberInput"] button {
     background-color: #EC769A !important;
     border-color: #EC769A !important;
-    border-radius: 0 8px 8px 0 !important;
+    border-radius: 8px !important;
 }
-div[data-testid="stNumberInput"] button:last-child svg {
+div[data-testid="stNumberInput"] button svg {
     fill: #ffffff !important;
     stroke: #ffffff !important;
 }
-div[data-testid="stNumberInput"] button:last-child:hover {
-    background-color: #FC8EAC !important;
+div[data-testid="stNumberInput"] button:hover {
+    background-color: #CC5580 !important;
+    border-color: #CC5580 !important;
 }
-
-/* - button — beige background, dark symbol */
-div[data-testid="stNumberInput"] button:first-of-type {
-    background-color: #EACFB3 !important;
-    border-color: #EACFB3 !important;
-    border-radius: 8px 0 0 8px !important;
-}
-div[data-testid="stNumberInput"] button:first-of-type svg {
-    fill: #2D241E !important;
-    stroke: #2D241E !important;
-}
-div[data-testid="stNumberInput"] button:first-of-type:hover {
-    background-color: #CCB083 !important;
+div[data-testid="stNumberInput"] button:hover svg {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
 }
 
 /* Button Styling */
