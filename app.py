@@ -203,33 +203,37 @@ def render_sync_inputs(features):
 
         # Initialize state
         if slider_key not in st.session_state:
-            st.session_state[slider_key] = low
+            st.session_state[slider_key] = float(low)
         if num_key not in st.session_state:
-            st.session_state[num_key] = low
+            st.session_state[num_key] = float(low)
 
         # Callbacks for two-way sync
         def sync_slider_to_num(sk=slider_key, nk=num_key):
-            st.session_state[nk] = st.session_state[sk]
+            st.session_state[nk] = float(st.session_state[sk])
 
-        def sync_num_to_slider(sk=slider_key, nk=num_key):
-            st.session_state[sk] = float(np.clip(st.session_state[nk], low, high_ext))
+        def sync_num_to_slider(sk=slider_key, nk=num_key, lo=low, hi=high_ext):
+            raw = st.session_state[nk]
+            st.session_state[sk] = float(np.clip(raw, lo, hi))
 
         col_slider, col_val = st.columns([3, 1])
 
         with col_slider:
             st.slider(
                 f.replace("_", " ").title(),
-                low, high_ext,
+                min_value=float(low),
+                max_value=float(high_ext),
+                value=float(np.clip(st.session_state[slider_key], low, high_ext)),  # ← always safe value
                 key=slider_key,
-                on_change=sync_slider_to_num  # ← slider updates number
+                on_change=sync_slider_to_num
             )
         with col_val:
             st.number_input(
                 "Value",
-                min_value=low,
-                max_value=high_ext,
+                min_value=float(low),
+                max_value=float(high_ext),
+                value=float(np.clip(st.session_state[num_key], low, high_ext)),     # ← always safe value
                 key=num_key,
-                on_change=sync_num_to_slider  # ← number updates slider
+                on_change=sync_num_to_slider
             )
 
         st.session_state.form_data[f] = st.session_state[slider_key]
