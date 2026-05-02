@@ -133,7 +133,7 @@ st.markdown("""
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;  
     min-height: 100px;
 }
 .stat-card-aligned h3 {
@@ -151,6 +151,8 @@ st.markdown("""
     color: #EC769A;
     margin: 0;
     line-height: 1.2;
+    text-align: center;
+    width: 100%
 }
 </style>
 
