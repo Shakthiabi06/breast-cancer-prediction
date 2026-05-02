@@ -88,6 +88,45 @@ div[data-testid="stNumberInput"] div[data-baseweb="input"] {
 
 /* Labels */
 label p { color: var(--text-dark) !important; font-weight: 700 !important; }
+            
+/* Tab Styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 12px;
+    background: transparent;
+    padding: 0.5rem 0;
+}
+.stTabs [data-baseweb="tab"] {
+    flex: 1;
+    justify-content: center;
+    background: white !important;
+    border-radius: 14px !important;
+    border: 1.5px solid #EACFB3 !important;
+    color: #CCB083 !important;
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    transition: all 0.2s ease;
+    opacity: 1 !important;        /* ← forces always visible */
+    visibility: visible !important;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    background: #FBC5C6 !important;
+    color: #EC769A !important;
+    border-color: #FC8EAC !important;
+}
+.stTabs [aria-selected="true"] {
+    background: #EC769A !important;
+    color: white !important;
+    border-color: #EC769A !important;
+}
+.stTabs [data-baseweb="tab-highlight"] {
+    display: none;   /* removes the default underline indicator */
+}
+.stTabs [data-baseweb="tab-border"] {
+    display: none;
+}
+            
 </style>
 """, unsafe_allow_html=True)
 
